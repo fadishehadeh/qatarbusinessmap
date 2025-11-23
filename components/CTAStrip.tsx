@@ -15,7 +15,7 @@ const CTAStrip: React.FC = () => {
           دعونا نري العالم منتجاتنا القطرية...
         </h2>
         <div className="flex flex-wrap justify-center gap-4 text-lg md:text-2xl font-light opacity-90">
-            <span className="border-b border-moci-gold pb-1">#MadeInQatar</span>
+            <span className="border-b border-moci-gold pb-1">#‏منا وفينا</span>
             <span className="border-b border-moci-gold pb-1">#معا_لدعم_المنتجات_القطرية</span>
         </div>
         
