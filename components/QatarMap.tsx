@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MapPin, Factory, Info } from 'lucide-react';
 
 interface IndustrialZone {
@@ -6,97 +6,221 @@ interface IndustrialZone {
   name: string;
   description: string;
   count: number;
-  // SVG coordinates for dot placement
-  cx: number;
-  cy: number;
+  // Real GPS coordinates for Qatar
+  lat: number;
+  lng: number;
 }
 
 const QatarMap: React.FC = () => {
-  const [activeZone, setActiveZone] = useState<string | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const googleMapRef = useRef<google.maps.Map | null>(null);
+  const markersRef = useRef<google.maps.Marker[]>([]);
+  const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
 
-  // Expanded list of zones with coordinates mapped to the new SVG path
+  // Real GPS coordinates for industrial zones in Qatar
   const zones: IndustrialZone[] = [
-    { 
-      id: 'al-ruwais', 
-      name: 'ميناء الرويس', 
+    {
+      id: 'al-ruwais',
+      name: 'ميناء الرويس',
       description: 'بوابة قطر الشمالية للتجارة، يدعم الأنشطة التجارية البحرية.',
-      count: 24, 
-      cx: 155, 
-      cy: 35 
+      count: 24,
+      lat: 26.1411,
+      lng: 51.2086
     },
-    { 
-      id: 'ras-laffan', 
-      name: 'مدينة راس لفان الصناعية', 
+    {
+      id: 'ras-laffan',
+      name: 'مدينة راس لفان الصناعية',
       description: 'المركز الرئيسي لإنتاج وتصدير الغاز الطبيعي المسال والصناعات الثقيلة.',
-      count: 124, 
-      cx: 215, 
-      cy: 90 
+      count: 124,
+      lat: 25.9272,
+      lng: 51.4825
     },
-    { 
-      id: 'al-khor', 
-      name: 'منطقة الخور الصناعية', 
+    {
+      id: 'al-khor',
+      name: 'منطقة الخور الصناعية',
       description: 'منطقة حيوية للصناعات المتوسطة والخدمات اللوجستية.',
-      count: 55, 
-      cx: 210, 
-      cy: 140 
+      count: 55,
+      lat: 25.6805,
+      lng: 51.4969
     },
-    { 
-      id: 'dukhan', 
-      name: 'منطقة دخان', 
+    {
+      id: 'dukhan',
+      name: 'منطقة دخان',
       description: 'أول حقول النفط في قطر، مركز صناعي هام في المنطقة الغربية.',
-      count: 42, 
-      cx: 55, 
-      cy: 210 
+      count: 42,
+      lat: 25.4167,
+      lng: 50.7833
     },
-    { 
-      id: 'doha-ind', 
-      name: 'المنطقة الصناعية - الدوحة', 
+    {
+      id: 'doha-ind',
+      name: 'المنطقة الصناعية - الدوحة',
       description: 'أقدم وأكبر منطقة للصناعات الصغيرة والمتوسطة والخدمات المساندة.',
-      count: 350, 
-      cx: 195, 
-      cy: 250 
+      count: 350,
+      lat: 25.2167,
+      lng: 51.4667
     },
-    { 
-      id: 'al-wukair', 
-      name: 'الوكير اللوجستية', 
+    {
+      id: 'al-wukair',
+      name: 'الوكير اللوجستية',
       description: 'مجمعات تخزين وورش عمل تخدم قطاع التجزئة والمشاريع الصغيرة.',
-      count: 88, 
-      cx: 185, 
-      cy: 290 
+      count: 88,
+      lat: 25.1500,
+      lng: 51.5333
     },
-    { 
-      id: 'mesaieed', 
-      name: 'مدينة مسيعيد الصناعية', 
+    {
+      id: 'mesaieed',
+      name: 'مدينة مسيعيد الصناعية',
       description: 'محور الصناعات البتروكيماوية، الأسمدة الكيماوية، والحديد والصلب.',
-      count: 98, 
-      cx: 210, 
-      cy: 350 
+      count: 98,
+      lat: 24.9833,
+      lng: 51.5500
     },
-    { 
-      id: 'um-alhoul', 
-      name: 'منطقة أم الحول', 
+    {
+      id: 'um-alhoul',
+      name: 'منطقة أم الحول',
       description: 'موقع استراتيجي بجوار ميناء حمد، يركز على الصناعات البحرية واللوجستية.',
-      count: 76, 
-      cx: 215, 
-      cy: 320 
+      count: 76,
+      lat: 25.0500,
+      lng: 51.5833
     },
-    { 
-      id: 'birkat', 
-      name: 'بركة العوامر', 
+    {
+      id: 'birkat',
+      name: 'بركة العوامر',
       description: 'منطقة لوجستية وصناعية متكاملة تخدم جنوب الدولة.',
-      count: 65, 
-      cx: 175, 
-      cy: 330 
+      count: 65,
+      lat: 25.0833,
+      lng: 51.4500
     },
-    { 
-      id: 'al-karaana', 
-      name: 'منطقة الكرعانة', 
+    {
+      id: 'al-karaana',
+      name: 'منطقة الكرعانة',
       description: 'منطقة واعدة للصناعات البيئية ومواد البناء.',
-      count: 45, 
-      cx: 120, 
-      cy: 280 
+      count: 45,
+      lat: 25.2500,
+      lng: 51.2000
     }
   ];
+
+  useEffect(() => {
+    // Load Google Maps script
+    const loadGoogleMaps = () => {
+      if (window.google && window.google.maps) {
+        initMap();
+        return;
+      }
+
+      const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&language=ar`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => initMap();
+      document.head.appendChild(script);
+    };
+
+    const initMap = () => {
+      if (!mapRef.current) return;
+
+      // Center of Qatar
+      const qatarCenter = { lat: 25.3548, lng: 51.1839 };
+
+      // Create map
+      const map = new google.maps.Map(mapRef.current, {
+        center: qatarCenter,
+        zoom: 8,
+        mapTypeControl: true,
+        streetViewControl: false,
+        fullscreenControl: true,
+        styles: [
+          {
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [{ visibility: "off" }]
+          }
+        ]
+      });
+
+      googleMapRef.current = map;
+
+      // Create info window
+      const infoWindow = new google.maps.InfoWindow();
+      infoWindowRef.current = infoWindow;
+
+      // Add markers for each zone
+      zones.forEach((zone) => {
+        const marker = new google.maps.Marker({
+          position: { lat: zone.lat, lng: zone.lng },
+          map: map,
+          title: zone.name,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 10,
+            fillColor: '#8A1538',
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 2,
+          },
+          animation: google.maps.Animation.DROP,
+        });
+
+        // Create directions URL
+        const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${zone.lat},${zone.lng}&travelmode=driving`;
+
+        // Create info window content with directions link
+        const content = `
+          <div style="font-family: 'Tajawal', sans-serif; direction: rtl; padding: 12px; max-width: 280px;">
+            <h3 style="color: #8A1538; font-weight: bold; margin: 0 0 10px 0; font-size: 17px;">${zone.name}</h3>
+            <p style="color: #666; font-size: 13px; line-height: 1.6; margin: 0 0 12px 0;">${zone.description}</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; margin-bottom: 12px;">
+              <span style="font-size: 12px; color: #9ca3af; font-weight: bold;">إجمالي المصانع</span>
+              <span style="background: rgba(192, 160, 98, 0.1); color: #8A1538; font-weight: bold; padding: 4px 8px; border-radius: 4px; font-size: 14px;">${zone.count}</span>
+            </div>
+            <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #8A1538; color: white; text-decoration: none; padding: 10px 16px; border-radius: 8px; font-weight: bold; font-size: 14px; transition: background 0.3s;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+              </svg>
+              احصل على الاتجاهات
+            </a>
+          </div>
+        `;
+
+        // Add hover listener to show info window
+        marker.addListener('mouseover', () => {
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker);
+        });
+
+        // Keep info window open on click as well
+        marker.addListener('click', () => {
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker);
+        });
+
+        // Optional: Close info window when mouse leaves (you can remove this if you want it to stay open)
+        marker.addListener('mouseout', () => {
+          // Add a small delay before closing to allow user to move mouse to the info window
+          setTimeout(() => {
+            // Only close if user is not hovering over the info window itself
+            const infoWindowElement = document.querySelector('.gm-style-iw-c');
+            if (infoWindowElement && !infoWindowElement.matches(':hover')) {
+              infoWindow.close();
+            }
+          }, 300);
+        });
+
+        markersRef.current.push(marker);
+      });
+    };
+
+    loadGoogleMaps();
+
+    // Cleanup
+    return () => {
+      markersRef.current.forEach(marker => marker.setMap(null));
+      markersRef.current = [];
+    };
+  }, []);
 
   return (
     <section className="bg-gradient-to-b from-white to-gray-50 py-20 overflow-hidden">
@@ -137,136 +261,17 @@ const QatarMap: React.FC = () => {
 
             <div className="bg-blue-50 p-4 rounded-lg flex gap-3 items-start text-sm text-blue-800">
                <Info className="shrink-0 mt-1" size={16} />
-               <p>قم بتمرير المؤشر على النقاط في الخريطة لعرض تفاصيل المنطقة وعدد المصانع المتواجدة بها.</p>
+               <p>مرر الماوس فوق النقاط في الخريطة التفاعلية لعرض تفاصيل المنطقة وعدد المصانع. انقر على "احصل على الاتجاهات" للتوجه إلى الموقع.</p>
             </div>
           </div>
 
-          {/* Interactive Map Visual */}
+          {/* Interactive Google Map */}
           <div className="lg:w-7/12 w-full flex justify-center relative order-1 lg:order-2">
-            <div className="relative w-full max-w-[500px] aspect-[3/4]">
-              
-              {/* Tooltip Popup (Calculated Position relative to SVG container) */}
-              {activeZone && (
-                (() => {
-                  const zone = zones.find(z => z.id === activeZone);
-                  if(!zone) return null;
-                  
-                  // Convert SVG coordinates to % for HTML positioning
-                  // ViewBox is 0 0 400 600
-                  const leftPercent = (zone.cx / 400) * 100;
-                  const topPercent = (zone.cy / 600) * 100;
+            <div className="relative w-full h-[600px] rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+              <div ref={mapRef} className="w-full h-full"></div>
 
-                  return (
-                    <div 
-                      className="absolute z-50 bg-white rounded-xl shadow-2xl p-5 w-64 border border-gray-100 animate-fade-in-up pointer-events-none"
-                      style={{ 
-                        top: `${topPercent}%`, 
-                        left: `${leftPercent}%`, 
-                        transform: 'translate(20px, -50%)' // Shift right of the dot
-                      }}
-                    >
-                      <div className="absolute top-1/2 -left-2 w-4 h-4 bg-white transform -translate-y-1/2 rotate-45 border-l border-b border-gray-100"></div>
-                      <h4 className="font-bold text-moci-maroon text-lg mb-2">{zone.name}</h4>
-                      <p className="text-xs text-gray-500 leading-relaxed mb-3">{zone.description}</p>
-                      <div className="flex justify-between items-center pt-3 border-t border-gray-100">
-                         <span className="text-xs font-bold text-gray-400">إجمالي المصانع</span>
-                         <span className="bg-moci-gold/10 text-moci-maroon font-bold px-2 py-0.5 rounded text-sm">{zone.count}</span>
-                      </div>
-                    </div>
-                  )
-                })()
-              )}
-
-              <svg 
-                viewBox="0 0 400 600" 
-                className="w-full h-full drop-shadow-2xl"
-                style={{ filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.1))' }}
-              >
-                <defs>
-                  <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="100%" stopColor="#f3f4f6" />
-                  </linearGradient>
-                </defs>
-                
-                {/* 
-                  Enhanced Qatar Map Path 
-                  More detailed jagged coastline and accurate peninsula shape
-                */}
-                <path 
-                  d="
-                    M 155 20 
-                    L 170 30
-                    L 180 35
-                    L 200 60
-                    L 215 90
-                    L 210 130
-                    L 215 150
-                    Q 210 160 215 170
-                    L 225 210
-                    Q 235 230 220 250
-                    L 230 280
-                    L 225 320
-                    L 230 360
-                    L 200 390
-                    L 150 420
-                    L 120 380
-                    L 90 350
-                    L 95 300
-                    L 70 250
-                    L 45 230
-                    L 40 200
-                    L 50 190
-                    L 70 195
-                    L 75 160
-                    L 85 120
-                    L 110 80
-                    L 130 50
-                    L 155 20
-                    Z
-                  " 
-                  className="fill-white stroke-gray-300 stroke-[1.5]"
-                  fill="url(#mapGradient)"
-                />
-
-                {zones.map((zone) => (
-                   <g 
-                     key={zone.id}
-                     onMouseEnter={() => setActiveZone(zone.id)} 
-                     onMouseLeave={() => setActiveZone(null)}
-                     className="cursor-pointer group"
-                   >
-                     {/* Transparent Hit Area */}
-                     <circle cx={zone.cx} cy={zone.cy} r="20" fill="transparent" />
-                     
-                     {/* Static Dot (No Animation) */}
-                     <circle 
-                       cx={zone.cx} 
-                       cy={zone.cy} 
-                       r="5" 
-                       className={`transition-all duration-300 ${activeZone === zone.id ? 'fill-moci-gold scale-125' : 'fill-moci-maroon'}`}
-                     />
-                     <circle 
-                       cx={zone.cx} 
-                       cy={zone.cy} 
-                       r="3" 
-                       className="fill-none stroke-white stroke-[0.5]"
-                     />
-                     
-                     {/* Static Ring on Hover only */}
-                     <circle 
-                        cx={zone.cx} 
-                        cy={zone.cy} 
-                        r="10" 
-                        className={`stroke-1 fill-none transition-all duration-300 ${activeZone === zone.id ? 'stroke-moci-maroon opacity-30 scale-100' : 'stroke-transparent scale-50'}`}
-                     />
-                   </g>
-                ))}
-
-              </svg>
-
-              <div className="absolute bottom-4 left-4 text-xs text-gray-400 bg-white/80 p-2 rounded backdrop-blur-sm">
-                * خارطة توضيحية للمناطق الصناعية
+              <div className="absolute bottom-4 left-4 text-xs text-gray-400 bg-white/90 px-3 py-2 rounded-lg backdrop-blur-sm shadow-md">
+                * مرر الماوس فوق النقاط لعرض تفاصيل المنطقة الصناعية
               </div>
             </div>
           </div>

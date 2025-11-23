@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, Search, X, Globe } from 'lucide-react';
+import mainLogo from '../logo-main.svg';
+import qatariProductLogo from '../logo.png';
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,21 +26,19 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center">
           {/* Logo Area */}
           <div className="flex items-center gap-4">
-            <div className="flex flex-col items-start">
-              <h1 className="text-xl font-bold text-moci-maroon leading-tight">
-                وزارة التجارة والصناعة
-              </h1>
-              <span className="text-xs text-gray-500 uppercase tracking-widest">
-                Ministry of Commerce and Industry
-              </span>
-            </div>
+            <img
+              src={mainLogo}
+              alt="وزارة التجارة والصناعة - Ministry of Commerce and Industry"
+              className="h-16 md:h-20 w-auto object-contain"
+            />
             {/* Divider */}
             <div className="h-10 w-px bg-gray-300 mx-2 hidden md:block"></div>
-            {/* Qatari Product Logo Placeholder */}
-             <div className="hidden md:flex flex-col items-center border border-moci-maroon/20 bg-moci-graybg px-2 py-1 rounded">
-                <span className="text-moci-maroon font-bold text-sm">منتج قطري</span>
-                <span className="text-[10px] text-gray-600">QATARI PRODUCT</span>
-            </div>
+            {/* Qatari Product Logo */}
+            <img
+              src={qatariProductLogo}
+              alt="منتج قطري - Qatari Product"
+              className="hidden md:block h-12 w-auto object-contain"
+            />
           </div>
 
           {/* Desktop Nav */}
