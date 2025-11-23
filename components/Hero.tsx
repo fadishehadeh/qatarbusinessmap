@@ -1,5 +1,6 @@
 import React from 'react';
 import { BadgeCheck } from 'lucide-react';
+import heroImage from '../doha.png';
 
 const Hero: React.FC = () => {
   return (
@@ -37,8 +38,8 @@ const Hero: React.FC = () => {
             <div className="hidden md:block md:col-span-5 relative perspective-1000">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 transform rotate-3 hover:rotate-0 transition-all duration-500 group">
                     <img 
-                        src="https://images.unsplash.com/photo-1597816827258-39c4a52fc041?q=80&w=1974&auto=format&fit=crop" 
-                        alt="نهضة قطر العمرانية - الدوحة" 
+                        src={heroImage} 
+                        alt="Doha skyline at sunset" 
                         className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     {/* Overlay Gradient */}
@@ -62,3 +63,5 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+
+
