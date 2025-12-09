@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import MissionVision from './components/MissionVision';
-import LogoRequestBanner from './components/LogoRequestBanner';
-import SearchWidget from './components/SearchWidget';
-import QatarMap from './components/QatarMap';
-import SuccessStories from './components/SuccessStories';
-import TradeEvents from './components/TradeEvents';
-import CTAStrip from './components/CTAStrip';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import IndustrialServices from './pages/IndustrialServices';
+import SuccessStories from './pages/SuccessStories';
+import NationalPrograms from './pages/NationalPrograms';
+import Regulations from './pages/Regulations';
+import TradeReports from './pages/TradeReports';
+import News from './pages/News';
+import SingleNews from './pages/SingleNews';
+import Contact from './pages/Contact';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -37,7 +39,7 @@ function App() {
             <h1 className="text-2xl font-bold text-gray-800 mb-2">وزارة التجارة والصناعة</h1>
             <p className="text-gray-500 font-medium">بوابة المنتج القطري (نسخة تجريبية)</p>
           </div>
-          
+
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-2">
               <label className="block text-sm font-bold text-gray-700">كلمة المرور</label>
@@ -53,14 +55,14 @@ function App() {
                 dir="ltr"
               />
             </div>
-            
+
             {error && (
               <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                 {error}
               </div>
             )}
-            
+
             <button
               type="submit"
               className="w-full bg-moci-maroon text-white py-4 rounded-lg font-bold text-lg hover:bg-moci-lightMaroon hover:shadow-lg transition-all duration-300"
@@ -68,7 +70,7 @@ function App() {
               دخول النظام
             </button>
           </form>
-          
+
           <div className="mt-8 text-center">
             <p className="text-xs text-gray-400">جميع الحقوق محفوظة © 2025</p>
           </div>
@@ -78,20 +80,23 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans" dir="rtl">
-      <Header />
-      <main>
-        <Hero />
-        <MissionVision />
-        <LogoRequestBanner />
-        <SearchWidget />
-        <QatarMap />
-        <SuccessStories />
-        <TradeEvents />
-        <CTAStrip />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-50 font-sans" dir="rtl">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/industrial-services" element={<IndustrialServices />} />
+          <Route path="/success-stories" element={<SuccessStories />} />
+          <Route path="/national-programs" element={<NationalPrograms />} />
+          <Route path="/regulations" element={<Regulations />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/news/:id" element={<SingleNews />} />
+          <Route path="/trade-reports" element={<TradeReports />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

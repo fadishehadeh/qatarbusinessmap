@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
-import { Menu, Search, X, Globe } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import mainLogo from '../logo-main.svg';
 import qatariProductLogo from '../logo.png';
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
+
+  const navItems = [
+    { path: '/', label: 'الصفحة الرئيسية' },
+    { path: '/industrial-services', label: 'خدمات الصناعة' },
+    { path: '/success-stories', label: 'قصص نجاح' },
+    { path: '/national-programs', label: 'البرامج الوطنية / تصدير' },
+    { path: '/regulations', label: 'معلومات تشريعية / تنظيمية' },
+    { path: '/news', label: 'الأخبار و التحديثات', hasSubmenu: true },
+    { path: '/contact', label: 'اتصل بنا' },
+  ];
+
+  const newsSubmenuItems = [
+    { path: '/news', label: 'آخر الأخبار' },
+    { path: '/trade-reports', label: 'تقارير صناعية' },
+  ];
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -22,36 +41,32 @@ const Header: React.FC = () => {
         </div>
       </div>
 
+      {/* Logo and Flag Section */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo Area */}
           <div className="flex items-center gap-4">
-            <img
-              src={mainLogo}
-              alt="وزارة التجارة والصناعة - Ministry of Commerce and Industry"
-              className="h-16 md:h-20 w-auto object-contain"
-            />
+            <Link to="/">
+              <img
+                src={mainLogo}
+                alt="وزارة التجارة والصناعة - Ministry of Commerce and Industry"
+                className="h-16 md:h-20 w-auto object-contain"
+              />
+            </Link>
             {/* Divider */}
             <div className="h-10 w-px bg-gray-300 mx-2 hidden md:block"></div>
             {/* Qatari Product Logo */}
-            <img
-              src={qatariProductLogo}
-              alt="منتج قطري - Qatari Product"
-              className="hidden md:block h-12 w-auto object-contain"
-            />
+            <Link to="/">
+              <img
+                src={qatariProductLogo}
+                alt="منتج قطري - Qatari Product"
+                className="hidden md:block h-12 w-auto object-contain"
+              />
+            </Link>
           </div>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8 text-gray-700 font-medium">
-            <a href="#" className="text-moci-maroon font-bold border-b-2 border-moci-maroon pb-1">الرئيسية</a>
-            <a href="#" className="hover:text-moci-maroon transition-colors">عن المنتج القطري</a>
-            <a href="#" className="hover:text-moci-maroon transition-colors">الخدمات الصناعية</a>
-            <a href="#" className="hover:text-moci-maroon transition-colors">دليل المصانع</a>
-            <a href="#" className="hover:text-moci-maroon transition-colors">اتصل بنا</a>
-          </nav>
-
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             className="lg:hidden text-moci-maroon"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -60,15 +75,45 @@ const Header: React.FC = () => {
         </div>
       </div>
 
+      {/* Navigation Menu - Centered Below Logo */}
+      <div className="border-t border-gray-200">
+        <div className="container mx-auto px-4">
+          <nav className="hidden lg:flex items-center justify-center gap-8 text-gray-700 font-medium py-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`hover:text-moci-maroon transition-colors pb-1 whitespace-nowrap ${
+                  isActive(item.path) || (item.hasSubmenu && location.pathname.startsWith('/news')) || (item.hasSubmenu && location.pathname === '/trade-reports')
+                    ? 'text-moci-maroon font-bold border-b-2 border-moci-maroon'
+                    : ''
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-100">
           <div className="flex flex-col p-4 space-y-4">
-             <a href="#" className="text-moci-maroon font-bold">الرئيسية</a>
-            <a href="#" className="text-gray-700">عن المنتج القطري</a>
-            <a href="#" className="text-gray-700">الخدمات الصناعية</a>
-            <a href="#" className="text-gray-700">دليل المصانع</a>
-            <a href="#" className="text-gray-700">اتصل بنا</a>
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`${
+                  isActive(item.path)
+                    ? 'text-moci-maroon font-bold'
+                    : 'text-gray-700'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       )}
