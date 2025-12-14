@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>صفحة المنتج القطري - وزارة التجارة والصناعة</title>
     
-    <!-- Fonts: Lusail for Qatar branding -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lusail:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts: Lusail for Qatar branding (embedded from CDN) -->
     
     <!-- Tailwind CSS (CDN for simplicity in this setup) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,19 +31,51 @@
       }
     </script>
     <style>
+      /* Lusail Font - Embedded from CDN for all users */
+      @font-face {
+        font-family: 'Lusail';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.eot');
+        src: url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.eot?#iefix') format('embedded-opentype'),
+             url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.woff2') format('woff2'),
+             url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.woff') format('woff'),
+             url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.ttf') format('truetype'),
+             url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.svg#Lusail') format('svg');
+      }
+
+      @font-face {
+        font-family: 'Lusail';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.eot');
+        src: url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.eot?#iefix') format('embedded-opentype'),
+             url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.woff2') format('woff2'),
+             url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.woff') format('woff'),
+             url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.ttf') format('truetype'),
+             url('https://db.onlinewebfonts.com/t/8c0d7404e89faa3a7b21df03b6050009.svg#Lusail') format('svg');
+      }
+
+      /* Apply Lusail font globally with fallbacks */
+      body, * {
+        font-family: 'Lusail', 'Tajawal', 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+      }
+
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
+        background: #f1f1f1;
       }
       ::-webkit-scrollbar-thumb {
-        background: #888; 
+        background: #888;
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
+        background: #555;
       }
     </style>
   <script type="importmap">
