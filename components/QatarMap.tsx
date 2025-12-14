@@ -168,7 +168,7 @@ const QatarMap: React.FC = () => {
 
         // Create info window content with directions link
         const content = `
-          <div style="font-family: 'Lusail', sans-serif; direction: rtl; padding: 12px; max-width: 280px;">
+          <div style="font-family: 'Tajawal', sans-serif; direction: rtl; padding: 12px; max-width: 280px;">
             <h3 style="color: #8A1538; font-weight: bold; margin: 0 0 10px 0; font-size: 17px;">${zone.name}</h3>
             <p style="color: #666; font-size: 13px; line-height: 1.6; margin: 0 0 12px 0;">${zone.description}</p>
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; margin-bottom: 12px;">
