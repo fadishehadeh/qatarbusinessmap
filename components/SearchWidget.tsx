@@ -94,19 +94,42 @@ const SearchWidget: React.FC = () => {
                 {/* Row 2: ISIC Classifications */}
                 <div className="md:col-span-6 space-y-2">
                   <label className="text-sm font-semibold text-gray-700">التصنيف الرئيسي (ISIC2)</label>
-                  <input
-                    type="text"
-                    placeholder="نشاط رئيسي و فرعي"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none"
-                  />
+                  <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none bg-white">
+                    <option value="">نشاط رئيسي و فرعي</option>
+                    <option value="10">10- صنع المنتجات الغذائية</option>
+                    <option value="11">11- صنع المشروبات</option>
+                    <option value="12">12- صنع منتجات التبغ</option>
+                    <option value="13">13- صنع المنسوجات</option>
+                    <option value="14">14- صنع الملبوسات</option>
+                    <option value="15">15- صنع المنتجات الجلدية والمنتجات ذات الصلة</option>
+                    <option value="16">16- صنع الخشب ومنتجات الخشب والفلين باستثناء الأثاث وصنع أصناف من القش ومواد الضفر</option>
+                    <option value="17">17- صنع الورق ومنتجات الورق</option>
+                    <option value="18">18- الطباعة واستنساخ وسائط الإعلام المسجلة</option>
+                    <option value="19">19- صنع فحم الكوك والمنتجات النفطية المكررة</option>
+                    <option value="20">20- صنع المواد الكيميائية والمنتجات الكيميائية</option>
+                    <option value="21">21- صنع المنتجات الصيدلانية الأساسية والمستحضرات الصيدلانية</option>
+                    <option value="22">22- صنع منتجات المطاط واللدائن</option>
+                    <option value="23">23- صنع منتجات المعادن اللافلزية الأخرى</option>
+                    <option value="24">24- صنع الفلزات القاعدية</option>
+                    <option value="25">25- صنع منتجات المعادن المشكلة باستثناء الآلات والمعدات</option>
+                    <option value="26">26- صنع الحواسيب والمنتجات الإلكترونية والبصرية</option>
+                    <option value="27">27- صنع المعدات الكهربائية</option>
+                    <option value="28">28- صناعة الآلات والمعدات غير المصنفة في موضع آخر</option>
+                    <option value="29">29- صناعة المركبات ذات المحركات والمركبات المقطورة ونصف المقطورة</option>
+                    <option value="30">30- صناعة معدات النقل الأخرى</option>
+                    <option value="31">31- صنع الأثاث</option>
+                    <option value="32">32- الصناعة التحويلية الأخرى</option>
+                    <option value="33">33- إصلاح وتركيب الآلات والمعدات</option>
+                    <option value="35">35- توصيل الكهرباء والغاز والبخار وتكييف الهواء</option>
+                    <option value="38">38- أنشطة جمع النفايات ومعالجتها وتصريفها واسترجاع المواد</option>
+                  </select>
                 </div>
                 <div className="md:col-span-6 space-y-2">
                   <label className="text-sm font-semibold text-gray-700">التصنيف الفرعي (ISIC4)</label>
-                  <input
-                    type="text"
-                    placeholder=""
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none"
-                  />
+                  <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none bg-white">
+                    <option value="">اختر التصنيف الفرعي...</option>
+                    {/* ISIC4 options will be populated based on ISIC2 selection */}
+                  </select>
                 </div>
 
                 {/* Row 3: Factory Name */}
