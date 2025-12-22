@@ -60,37 +60,74 @@ const SearchWidget: React.FC = () => {
 
         {/* Form Body */}
         <div className="p-8 bg-white">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             
             {/* Conditional Inputs based on Tab */}
             {activeTab === SearchTab.Activity && (
               <>
-                <div className="md:col-span-5 space-y-2">
-                  <label className="text-sm font-semibold text-gray-700">التصنيف الرئيسي (ISIC2)</label>
-                  <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none bg-white">
-                    <option>اختر التصنيف الرئيسي...</option>
-                    <option>الصناعات التحويلية</option>
-                    <option>التعدين واستغلال المحاجر</option>
-                  </select>
+                {/* Row 1: Activity Type */}
+                <div className="md:col-span-12 space-y-2">
+                  <label className="text-sm font-semibold text-gray-700">نوع النشاط</label>
+                  <div className="flex gap-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="activityType"
+                        value="activity"
+                        defaultChecked
+                        className="w-4 h-4 text-moci-maroon focus:ring-moci-maroon"
+                      />
+                      <span className="text-gray-700">بحث بالنشاط</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="activityType"
+                        value="mainAndSub"
+                        className="w-4 h-4 text-moci-maroon focus:ring-moci-maroon"
+                      />
+                      <span className="text-gray-700">بحث بالنشاط</span>
+                    </label>
+                  </div>
                 </div>
-                <div className="md:col-span-5 space-y-2">
+
+                {/* Row 2: ISIC Classifications */}
+                <div className="md:col-span-6 space-y-2">
+                  <label className="text-sm font-semibold text-gray-700">التصنيف الرئيسي (ISIC2)</label>
+                  <input
+                    type="text"
+                    placeholder="نشاط رئيسي و فرعي"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none"
+                  />
+                </div>
+                <div className="md:col-span-6 space-y-2">
                   <label className="text-sm font-semibold text-gray-700">التصنيف الفرعي (ISIC4)</label>
-                  <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none bg-white">
-                    <option>اختر التصنيف الفرعي...</option>
-                    <option>صنع المنتجات الغذائية</option>
-                    <option>صنع المشروبات</option>
-                  </select>
+                  <input
+                    type="text"
+                    placeholder=""
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none"
+                  />
+                </div>
+
+                {/* Row 3: Factory Name */}
+                <div className="md:col-span-12 space-y-2">
+                  <label className="text-sm font-semibold text-gray-700">اسم المصنع</label>
+                  <input
+                    type="text"
+                    placeholder=""
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none"
+                  />
                 </div>
               </>
             )}
 
             {activeTab === SearchTab.Product && (
               <>
-                <div className="md:col-span-10 space-y-2">
+                <div className="md:col-span-12 space-y-2">
                   <label className="text-sm font-semibold text-gray-700">اسم المنتج</label>
-                  <input 
-                    type="text" 
-                    placeholder="ابحث عن منتج (مثال: ألبان، حديد، بلاستيك...)" 
+                  <input
+                    type="text"
+                    placeholder="ابحث عن منتج (مثال: ألبان، حديد، بلاستيك...)"
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none"
                   />
                 </div>
@@ -99,29 +136,25 @@ const SearchWidget: React.FC = () => {
 
             {activeTab === SearchTab.Factory && (
                <>
-                <div className="md:col-span-10 space-y-2">
+                <div className="md:col-span-12 space-y-2">
                   <label className="text-sm font-semibold text-gray-700">اسم المصنع</label>
-                  <input 
-                    type="text" 
-                    placeholder="ابحث باسم المصنع..." 
+                  <input
+                    type="text"
+                    placeholder="ابحث باسم المصنع..."
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none"
                   />
                 </div>
               </>
             )}
 
-            {/* Action Buttons */}
-            <div className="md:col-span-2 flex flex-col gap-2">
-               <button className="w-full bg-moci-maroon text-white p-3 rounded-lg font-bold hover:bg-moci-lightMaroon transition-colors flex justify-center items-center gap-2">
-                 <Search size={20} />
-                 بحث
-               </button>
-               <button className="w-full text-xs text-gray-500 hover:text-moci-maroon flex justify-center items-center gap-1 mt-1">
-                 <Filter size={12} />
-                 مسح البحث
-               </button>
-            </div>
+          </div>
 
+          {/* Action Button - Positioned at bottom left */}
+          <div className="mt-6 flex justify-start">
+            <button className="bg-moci-maroon text-white px-8 py-3 rounded-lg font-bold hover:bg-moci-lightMaroon transition-colors flex items-center gap-2">
+              <Search size={20} />
+              بحث
+            </button>
           </div>
         </div>
       </div>
