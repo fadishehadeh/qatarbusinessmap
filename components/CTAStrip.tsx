@@ -12,17 +12,11 @@ const CTAStrip: React.FC = () => {
             <Heart className="fill-white text-white w-8 h-8 animate-pulse" />
         </div>
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          دعونا نري العالم منتجاتنا القطرية...
+          دعونا نُري العالم منتجاتنا القطرية...
         </h2>
         <div className="flex flex-wrap justify-center gap-4 text-lg md:text-2xl font-light opacity-90">
             <span className="border-b border-moci-gold pb-1">#‏منا وفينا</span>
             <span className="border-b border-moci-gold pb-1">#معا_لدعم_المنتجات_القطرية</span>
-        </div>
-        
-        <div className="mt-10">
-             <button className="bg-white text-moci-maroon px-8 py-3 rounded-full font-bold hover:bg-moci-gold hover:text-white transition-all shadow-lg">
-                انضم إلى المبادرة
-             </button>
         </div>
       </div>
     </section>

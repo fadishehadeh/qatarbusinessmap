@@ -24,7 +24,7 @@ const TradeEvents: React.FC = () => {
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">الأحداث والمعارض التجارية</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">الاخبار والاحداث</h2>
           <a href="#" className="flex items-center gap-2 text-moci-maroon font-bold hover:text-moci-gold transition-colors">
             <span>عرض الكل</span>
             <ArrowLeft size={18} />

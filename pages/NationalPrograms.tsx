@@ -6,7 +6,7 @@ const NationalPrograms: React.FC = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-l from-moci-maroon to-moci-lightMaroon text-white py-16">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">البرامج الوطنية / تصدير</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">البرامج الوطنية / تصدير ( دولة قطر )</h1>
           <p className="text-xl text-white/90 max-w-3xl">
             التصدير في القطاع الصناعي يعد أساساً لتعزيز الاقتصاد الوطني في قطر
           </p>

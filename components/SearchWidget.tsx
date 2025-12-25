@@ -93,7 +93,7 @@ const SearchWidget: React.FC = () => {
 
                 {/* Row 2: ISIC Classifications */}
                 <div className="md:col-span-6 space-y-2">
-                  <label className="text-sm font-semibold text-gray-700">التصنيف الرئيسي (ISIC2)</label>
+                  <label className="text-sm font-semibold text-gray-700">التصنيف الرئيسي (HS code)</label>
                   <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none bg-white">
                     <option value="">نشاط رئيسي و فرعي</option>
                     <option value="10">10- صنع المنتجات الغذائية</option>

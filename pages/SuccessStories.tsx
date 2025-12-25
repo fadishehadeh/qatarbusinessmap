@@ -40,7 +40,7 @@ const SuccessStories: React.FC = () => {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">قصص نجاح</h1>
           <p className="text-xl text-white/90 max-w-3xl">
-            تسلط قصص النجاح التي كتبتها مصانع مختلفة الضوء على إنجازاتها المتنوعة وتأثيرها الإيجابي على صناعاتها
+            تُسلِّط قصص النجاح الضوء على إنجازات المصانع، لتصبح مثالًا يُحتذى به في تنمية عجلة القطاع الصناعي
           </p>
         </div>
       </div>
