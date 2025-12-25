@@ -14,9 +14,9 @@ const Home: React.FC = () => {
       <Hero />
       <MissionVision />
       <LogoRequestBanner />
+      <SuccessStories />
       <SearchWidget />
       <QatarMap />
-      <SuccessStories />
       <TradeEvents />
       <CTAStrip />
     </main>
