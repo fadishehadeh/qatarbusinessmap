@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import IndustrialServices from './pages/IndustrialServices';
 import SuccessStories from './pages/SuccessStories';
@@ -81,6 +82,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-gray-50 font-sans" dir="rtl">
         <Header />
         <Routes>
