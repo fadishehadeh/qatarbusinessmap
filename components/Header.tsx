@@ -13,11 +13,10 @@ const Header: React.FC = () => {
   const navItems = [
     { path: '/', label: 'الصفحة الرئيسية' },
     { path: '/industrial-services', label: 'خدمات الصناعة' },
-    { path: '/logo-request', label: 'خدمة شعار "منتج قطري"' },
     { path: '/success-stories', label: 'قصص نجاح' },
-    { path: '/national-programs', label: 'البرامج الوطنية / تصدير ( دولة قطر )' },
+    { path: '/national-programs', label: 'البرامج الوطنية / تصدير' },
     { path: '/regulations', label: 'معلومات تشريعية / تنظيمية' },
-    { path: '/news', label: 'الأخبار والتحديثات', hasSubmenu: true },
+    { path: '/news', label: 'الأخبار والأحداث', hasSubmenu: true },
     { path: '/contact', label: 'اتصل بنا' },
   ];
 

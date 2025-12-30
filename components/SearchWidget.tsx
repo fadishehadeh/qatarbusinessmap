@@ -125,7 +125,7 @@ const SearchWidget: React.FC = () => {
                   </select>
                 </div>
                 <div className="md:col-span-6 space-y-2">
-                  <label className="text-sm font-semibold text-gray-700">التصنيف الفرعي (ISIC4)</label>
+                  <label className="text-sm font-semibold text-gray-700">التصنيف الفرعي (HS Code)</label>
                   <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moci-maroon focus:border-transparent outline-none bg-white">
                     <option value="">اختر التصنيف الفرعي...</option>
                     {/* ISIC4 options will be populated based on ISIC2 selection */}
