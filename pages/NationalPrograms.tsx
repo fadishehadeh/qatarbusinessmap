@@ -29,7 +29,7 @@ const NationalPrograms: React.FC = () => {
         {/* CTA Section */}
         <div className="bg-gradient-to-l from-moci-maroon to-moci-lightMaroon text-white rounded-lg p-8 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            دعونا نرى العالم منتجاتنا الوطنية التي تعتز بها في قطر شارك معنا
+            دعونا نرى العالم منتجاتنا الوطنية التي تعتز بها في قطر
           </h2>
           <p className="text-xl mb-6">
             في الواتساغ على تويتر وانستغرام
