@@ -110,11 +110,11 @@ const TradeReports: React.FC = () => {
         {/* CTA Section */}
         <div className="bg-gradient-to-l from-moci-maroon to-moci-lightMaroon text-white rounded-lg p-8 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            دعونا نُعرّف العالم على منتجاتنا الوطنية التي نفخر بها في قطر، عبر واتساب وتويتر وإنستغرام.
+            دعونا نُعرّف العالم على منتجاتنا الوطنية التي نفخر بها في قطر، عبر وسائل التواصل الاجتماعي.
           </h2>
           <div className="flex flex-wrap justify-center gap-4">
             <button className="bg-white text-moci-maroon px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors">
-              #معا_لدعم_المنتجات_الوطنية
+              #المنتج_القطري
             </button>
             <button className="bg-white text-moci-maroon px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors">
               #MadeInQatar

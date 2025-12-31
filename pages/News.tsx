@@ -96,7 +96,7 @@ const News: React.FC = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-l from-moci-maroon to-moci-lightMaroon text-white py-16">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">الأخبار والأحداث</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">الاخبار والفعاليات</h1>
           <p className="text-xl text-white/90 max-w-3xl">
             تابع آخر الأخبار والمستجدات في القطاع الصناعي والتجاري في دولة قطر
           </p>

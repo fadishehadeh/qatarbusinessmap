@@ -53,16 +53,6 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 4: Newsletter/Brand */}
-          <div className="bg-white/5 p-6 rounded-lg">
-             <h6 className="text-white font-bold mb-3">النشرة البريدية</h6>
-             <p className="text-xs mb-4">اشترك للحصول على آخر أخبار الصناعة القطرية.</p>
-             <div className="flex flex-col gap-2">
-               <input type="email" placeholder="البريد الإلكتروني" className="bg-gray-800 border border-gray-700 text-white px-3 py-2 rounded focus:outline-none focus:border-moci-maroon" />
-               <button className="bg-moci-maroon text-white py-2 rounded font-bold hover:bg-white hover:text-moci-maroon transition-colors">اشترك</button>
-             </div>
-          </div>
-
         </div>
       </div>
       

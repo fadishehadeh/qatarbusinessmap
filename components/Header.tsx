@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     { path: '/success-stories', label: 'قصص نجاح' },
     { path: '/national-programs', label: 'البرامج الوطنية / تصدير' },
     { path: '/regulations', label: 'معلومات تشريعية / تنظيمية' },
-    { path: '/news', label: 'الأخبار والأحداث', hasSubmenu: true },
+    { path: '/news', label: 'الاخبار والفعاليات', hasSubmenu: true },
     { path: '/contact', label: 'اتصل بنا' },
   ];
 
