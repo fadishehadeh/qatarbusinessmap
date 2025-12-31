@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
 
                 <h1 className="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-lg">
                     صفحة المنتج القطري
-                    <span className="block text-moci-gold mt-4">جودة عالمية بأيادي وطنية</span>
+                    <span className="block text-moci-gold mt-6">جودة عالمية بأيادي وطنية</span>
                 </h1>
 
                 <p className="text-lg md:text-xl text-gray-100 font-light leading-relaxed drop-shadow-md whitespace-nowrap">
