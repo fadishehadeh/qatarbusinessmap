@@ -12,6 +12,7 @@ const Header: React.FC = () => {
 
   const navItems = [
     { path: '/', label: 'الصفحة الرئيسية' },
+    { path: '/qatar-business-map', label: 'خريطة الأعمال القطرية' },
     { path: '/industrial-services', label: 'خدمات الصناعة' },
     { path: '/success-stories', label: 'قصص نجاح' },
     { path: '/national-programs', label: 'البرامج الوطنية / تصدير' },
