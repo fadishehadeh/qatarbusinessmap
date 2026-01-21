@@ -64,57 +64,61 @@ const InteractiveQatarMap: React.FC<InteractiveQatarMapProps> = ({
   useEffect(() => {
     if (!mapRef.current) return;
 
-    // Initialize Google Map
-    const map = new google.maps.Map(mapRef.current, {
-      center: { lat: 25.3548, lng: 51.1839 }, // Center of Qatar
-      zoom: 8,
-      mapTypeId: 'roadmap',
-      disableDefaultUI: false,
-      zoomControl: true,
-      mapTypeControl: false,
-      streetViewControl: false,
-      fullscreenControl: true,
-      styles: [
-        {
-          featureType: 'all',
-          elementType: 'geometry',
-          stylers: [{ color: '#f5f5f5' }]
-        },
-        {
-          featureType: 'water',
-          elementType: 'geometry',
-          stylers: [{ color: '#e9e9e9' }]
-        },
-        {
-          featureType: 'water',
-          elementType: 'labels.text.fill',
-          stylers: [{ color: '#9e9e9e' }]
-        }
-      ]
-    });
+    // Function to initialize the map
+    const initMap = () => {
+      if (!mapRef.current) return;
 
-    googleMapRef.current = map;
-
-    // Clear existing markers
-    markersRef.current.forEach(marker => marker.setMap(null));
-    markersRef.current = [];
-
-    // Add markers for each municipality
-    municipalities.forEach((municipality) => {
-      const marker = new google.maps.Marker({
-        position: { lat: municipality.lat, lng: municipality.lng },
-        map: map,
-        title: `${municipality.name} - ${municipality.establishments.toLocaleString()} منشأة`,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          fillColor: getMarkerColor(municipality.establishments),
-          fillOpacity: 0.85,
-          strokeColor: '#FFFFFF',
-          strokeWeight: 2,
-          scale: getMarkerScale(municipality.size) * 8
-        },
-        animation: google.maps.Animation.DROP
+      // Initialize Google Map
+      const map = new google.maps.Map(mapRef.current, {
+        center: { lat: 25.3548, lng: 51.1839 }, // Center of Qatar
+        zoom: 8,
+        mapTypeId: 'roadmap',
+        disableDefaultUI: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: true,
+        styles: [
+          {
+            featureType: 'all',
+            elementType: 'geometry',
+            stylers: [{ color: '#f5f5f5' }]
+          },
+          {
+            featureType: 'water',
+            elementType: 'geometry',
+            stylers: [{ color: '#e9e9e9' }]
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#9e9e9e' }]
+          }
+        ]
       });
+
+      googleMapRef.current = map;
+
+      // Clear existing markers
+      markersRef.current.forEach(marker => marker.setMap(null));
+      markersRef.current = [];
+
+      // Add markers for each municipality
+      municipalities.forEach((municipality) => {
+        const marker = new google.maps.Marker({
+          position: { lat: municipality.lat, lng: municipality.lng },
+          map: map,
+          title: `${municipality.name} - ${municipality.establishments.toLocaleString()} منشأة`,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: getMarkerColor(municipality.establishments),
+            fillOpacity: 0.85,
+            strokeColor: '#FFFFFF',
+            strokeWeight: 2,
+            scale: getMarkerScale(municipality.size) * 8
+          },
+          animation: google.maps.Animation.DROP
+        });
 
       // Info window
       const infoWindow = new google.maps.InfoWindow({
@@ -160,8 +164,27 @@ const InteractiveQatarMap: React.FC<InteractiveQatarMapProps> = ({
         });
       });
 
-      markersRef.current.push(marker);
-    });
+        markersRef.current.push(marker);
+      });
+    };
+
+    // Load Google Maps script dynamically
+    const loadGoogleMaps = () => {
+      if (window.google && window.google.maps) {
+        initMap();
+        return;
+      }
+
+      const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&language=ar`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => initMap();
+      document.head.appendChild(script);
+    };
+
+    loadGoogleMaps();
 
     return () => {
       markersRef.current.forEach(marker => marker.setMap(null));
